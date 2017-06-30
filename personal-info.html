@@ -78,8 +78,8 @@
             }
            }
             loadUserDetails() {
-                 var item = getValuesForuserids(this.userid);
-                console.log(this.userid);
+                if(!this.userid) return;
+                var item = getValuesForuserids(this.userid);
                 this.firstname = item.firstname;
                 this.lastname = item.lastname;
                 this.age = item.age;
