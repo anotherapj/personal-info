@@ -1,0 +1,36 @@
+{
+  "name": "personal-info",
+  "version": "1.0.0",
+  "description": "Personal Information container",
+  "authors": [
+    "Sample Author"
+  ],
+  "keywords": [
+    "samples",
+    "examples",
+    "personal"
+  ],
+  "main": [
+   "personal-info.html"
+  ],
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anotherapj/personal-info.git"
+  },
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/anotherapj/personal-info",
+  "ignore": [],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-input": "PolymerElements/paper-input#1 - 2"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  }
+}

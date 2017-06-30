@@ -1,0 +1,120 @@
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-styles/color.html">
+<dom-module id="personal-info">
+  <template>
+    <style>
+            :host {
+                display: block;
+                font-family: 'Roboto', 'Noto', sans-serif;
+                border: 1px solid blue;
+                width: 350px;
+            }
+            th {
+                text-align: left;
+                padding-top: 20px;
+            }
+            paper-button.blue {
+                background-color: var(--paper-indigo-500);
+                color: white;
+            }
+            .buttonCont {
+                padding-top: 20px;
+            }
+            .error {
+                border: 1px solid red;
+            }
+        </style>
+        <h2>Personal Information</h2>
+        <table id="personData">
+            <tr>
+            <th>First Name:</th>
+            <td>
+                <paper-input type="text" name="firstname" value="{{firstname}}"></paper-input>
+            </td>
+            </tr>
+            <tr>
+            <th>Last Name:</th>
+            <td>
+                <paper-input type="text" name="lastname" value="{{lastname}}"></paper-input>
+            </td>
+            </tr>
+            <tr>
+            <th>
+                Age:
+            </th>
+            <td>
+                <paper-input type="text" name="age" value="{{age}}"></paper-input>
+            </td>
+            </tr>
+            <tr>
+            <td class="buttonCont">
+                <paper-button raised class="blue" on-click="submitData" name="submit">Submit</paper-button>
+            </td>
+            <td class="buttonCont">
+                <paper-button raised class="blue" on-click="resetData" name="reset" disabled>Reset</paper-button>
+            </td>
+            </tr>
+        </table>
+    </template>
+    <script>
+        class PersonalInfo extends Polymer.Element {
+            constructor() {
+                super();
+            }
+           static get is(){return 'personal-info';}
+           
+           static get properties() {
+            return {
+                classname: {
+                    type: String,
+                    value: 'personal-info'
+                }, 
+                userid: String, 
+                firstname:String,
+                lastname: String,
+                age:String
+            }
+           }
+            loadUserDetails() {
+                 var item = getValuesForuserids(this.userid);
+                console.log(this.userid);
+                this.firstname = item.firstname;
+                this.lastname = item.lastname;
+                this.age = item.age;
+            }            
+            connectedCallback() {
+                super.connectedCallback();
+                this.loadUserDetails();
+            }
+
+            submitData() {
+                if(this.firstname == "") {
+                    console.log(this.shadowRoot.querySelector("*[name=firstname]").attributes.class);
+                    var namefield = this.shadowRoot.querySelector("*[name=firstname]");
+                    namefield.setAttribute("class", "error");
+                    return false;
+                }
+                console.log("Data Submitted for id" + this.userid + "=" + this.firstname + "," + this.lastname + "," +  this.age);
+            }
+
+            resetData() {
+                console.log("Data Reset for user id - " + this.userid);
+                this.loadUserDetails();
+            }
+        }
+       function getValuesForuserids(userid) {
+                var items = [{"userid": "123", "firstname": "John", "lastname": "Mike", "age": "32"},
+                             {"userid": "456", "firstname": "John", "lastname": "Tyson", "age": "72"},
+                             {"userid": "789", "firstname": "John", "lastname": "Mex", "age": "42"}
+                                ];
+                for(idx in items) {
+                    var item = items[idx];
+                    if(items[idx].userid == userid)
+                        return items[idx];
+                }
+         }        
+        window.customElements.define(PersonalInfo.is, PersonalInfo);
+    </script>
+</dom-module>
